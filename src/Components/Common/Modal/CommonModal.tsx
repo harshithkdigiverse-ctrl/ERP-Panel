@@ -43,7 +43,7 @@ const CommonModal: FC<CommonModalProps> = ({ isOpen, onClose, children, classNam
         <div>
           {(title || subTitle) && (
             <div className={`px-2 pr-8 sm:pr-14 pb-3 mb-3 lg:mb-4 ${title || subTitle ? " border-b border-gray-200 dark:border-gray-800" : ""} `}>
-              <h4 className="text-xl sm:text-2xl font-semibold text-gray-800 dark:text-white/90">{title}</h4>
+              <h4 className="text-xl sm:text-2xl font-semibold text-gray-800 dark:text-white/90 capitalize">{title}</h4>
               {subTitle && <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">{subTitle}</p>}
             </div>
           )}

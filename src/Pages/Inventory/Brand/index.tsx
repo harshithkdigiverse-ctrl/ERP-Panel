@@ -3,7 +3,6 @@ import { useMemo, useState } from "react";
 import type { BrandBase } from "../../../Types/Brand";
 import { Mutations, Queries } from "../../../Api";
 import { CommonActionColumn, CommonCard, CommonDataGrid, CommonDeleteModal } from "../../../Components/Common";
-
 import { PAGE_TITLE } from "../../../Constants";
 import { useDataGrid } from "../../../Utils/Hooks";
 import BrandForm from "./BrandForm";

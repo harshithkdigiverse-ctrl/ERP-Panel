@@ -14,6 +14,7 @@ export type AddBrandPayload = BrandFormValues & { companyId?: string };
 export type EditBrandPayload = AddBrandPayload & { brandId: string };
 
 export type BrandBase = BrandFormValues & CommonDataType;
+
 export interface BrandDataResponse extends PageStatus {
   brand_data: BrandBase[];
 }

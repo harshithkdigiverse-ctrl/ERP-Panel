@@ -72,7 +72,7 @@ export const BrandFormSchema = Yup.object({
   code: Validation("string", "code"),
   description: Validation("string", "Description", { required: false }),
   parentcategory: Validation("string", "Parent Category", { required: false }),
-  isActive: Yup.boolean().notRequired(),
+  isActive: Validation("boolean", "is Active", { required: false }),
 });
 
 export const RolesFormSchema = Yup.object({

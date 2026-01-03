@@ -19,8 +19,8 @@ import BankTransaction from "../Pages/Bank/BankTransaction";
 import PaymentList from "../Pages/Bank/Payment";
 import PaymentForm from "../Pages/Bank/Payment/PaymentForm";
 import NewPos from "../Pages/POS/New";
-import BrandForm from "../Pages/Inventory/Brand/BrandForm";
 import Brand from "../Pages/Inventory/Brand";
+import BrandForm from "../Pages/Inventory/Brand/BrandForm";
 
 export const PageRoutes = [
   { path: ROUTES.HOME, element: <Dashboard /> },
