@@ -1,5 +1,6 @@
 import { KEYS, URL_KEYS } from "../Constants";
 import type { AnnouncementApiResponse, AppQueryOptions, BranchApiResponse, EmployeeApiResponse, Params, ProductApiResponse, RolesApiResponse, UploadResponse } from "../Types";
+import type { BrandApiResponse } from "../Types/Brand";
 import type { CompanyApiResponse } from "../Types/Company";
 import { CleanParams } from "../Utils";
 import { Get } from "./Methods";
@@ -22,6 +23,10 @@ export const Queries = {
   // ************ Branch ***********
 
   useGetBranch: (params?: Params) => useQueries<BranchApiResponse>([KEYS.BRANCH.BASE, params], () => Get(URL_KEYS.BRANCH.ALL, params)),
+
+   // ************ Branch ***********
+
+  useGetBrand: (params?: Params) => useQueries<BrandApiResponse>([KEYS.BRAND.BASE, params], () => Get(URL_KEYS.BRAND.ALL, params)),
 
   // ************ Roles ***********
 
