@@ -31,7 +31,7 @@ const CommonDataGrid: FC<CommonDataGridProps> = ({ columns, rows, rowCount, load
       {
         field: "srNo",
         headerName: "Sr No",
-        width: 90,
+        width: 80,
         sortable: false,
         filterable: false,
         valueGetter: (_value, row) => paginationModel.page * paginationModel.pageSize + rows.findIndex((r) => r.id === row.id) + 1,

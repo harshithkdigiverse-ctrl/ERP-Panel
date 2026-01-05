@@ -2,18 +2,20 @@ import type { GridColDef } from "@mui/x-data-grid";
 import { useMemo } from "react";
 import type { BrandBase } from "../../../Types/Brand";
 import { Mutations, Queries } from "../../../Api";
-import { CommonActionColumn, CommonCard, CommonDataGrid, CommonDeleteModal } from "../../../Components/Common";
+import { CommonActionColumn, CommonBreadcrumbs, CommonCard, CommonDataGrid, CommonDeleteModal } from "../../../Components/Common";
 import { PAGE_TITLE } from "../../../Constants";
 import { useDataGrid } from "../../../Utils/Hooks";
 import BrandForm from "./BrandForm";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setBrandModal } from "../../../Store/Slices/ModalSlice";
+import { Box } from "@mui/material";
+import { BREADCRUMBS } from "../../../Data";
 
 
 const Brand = () => {
   const { paginationModel, setPaginationModel, sortModel, setSortModel, filterModel, setFilterModel, rowToDelete, setRowToDelete, isActive, setActive, params } = useDataGrid();
   const dispatch = useDispatch();
-  const { isBrandModal } = useSelector((state: any) => state.modal);
+
 
   const { data: BrandsData, isLoading: brandsDataLoading, isFetching: brandsDataFetching } = Queries.useGetBrand(params);
   const { mutate: deleteBrandsMutate } = Mutations.useDeleteBrand();
@@ -68,11 +70,14 @@ const Brand = () => {
 
   return (
     <>
-      <CommonCard title={PAGE_TITLE.INVENTORY.BRAND.BASE}>
-        <CommonDataGrid {...CommonDataGridOption} />
-      </CommonCard>
-      <CommonDeleteModal open={Boolean(rowToDelete)} itemName={rowToDelete?.title} onClose={() => setRowToDelete(null)} onConfirm={() => handleDeleteBtn()} />
-      <BrandForm />
+      <CommonBreadcrumbs title={PAGE_TITLE.INVENTORY.BRAND.BASE} maxItems={1} breadcrumbs={BREADCRUMBS.BRAND.BASE} />
+      <Box sx={{ p: { xs: 2, md: 3 } }}>
+        <CommonCard hideDivider>
+          <CommonDataGrid {...CommonDataGridOption} />
+        </CommonCard>
+        <CommonDeleteModal open={Boolean(rowToDelete)} itemName={rowToDelete?.title} onClose={() => setRowToDelete(null)} onConfirm={() => handleDeleteBtn()} />
+        <BrandForm />
+      </Box>
     </>
   );
 };
