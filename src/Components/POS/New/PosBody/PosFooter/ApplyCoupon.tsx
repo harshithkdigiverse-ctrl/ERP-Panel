@@ -11,7 +11,7 @@ const ApplyCoupon = () => {
     <CommonModal title="Apply Coupon" isOpen={isApplyCouponModal} onClose={() => dispatch(setApplyCouponModal())} className="max-w-[500px]">
       <div className="space-y-3 pe-1 sm:pe-3">
         <div className="flex justify-center">
-          <span className="bg-blue-600 text-white px-4 py-2 rounded text-sm font-semibold">Invoice Balance: 500.00</span>
+          <span className="bg-brand-500 text-white px-4 py-2 rounded text-sm font-semibold">Invoice Balance: 500.00</span>
         </div>
         <div className="">
           <CommonTextField value="123456" onChange={(e) => console.log(e)} />

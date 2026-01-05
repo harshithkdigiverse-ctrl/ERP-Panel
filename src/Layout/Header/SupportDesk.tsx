@@ -50,7 +50,7 @@ const SupportDesk = () => {
                 <span className="text-gray-800 dark:text-gray-300">9:00 AM – 9:00 PM (IST)</span>
               </li>
             </ul>
-            <button onClick={() => setOpen(!open)} className="mt-4 w-full py-2 text-center text-white font-medium bg-blue-600 rounded-lg hover:bg-blue-700">
+            <button onClick={() => setOpen(!open)} className="mt-4 w-full py-2 text-center text-white font-medium bg-brand-500 rounded-lg hover:bg-brand-600">
               Request A Callback
             </button>
           </div>

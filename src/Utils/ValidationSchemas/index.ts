@@ -181,3 +181,20 @@ export const CustomerFormSchema = Yup.object({
   flowControl: Validation("string", "Flow Control"),
   precision: Validation("string", "Precision"),
 });
+
+export const MultiplePaySchema = Yup.object({
+  payments: Yup.array()
+    .of(
+      Yup.object({
+        amount: Yup.number().typeError("Amount must be a number").positive("Amount must be greater than 0").required("Received Amount is required"),
+        paymentMode: Validation("string", "Payment Method"),
+        paymentAccount: Yup.string().when("paymentMode", ([paymentMode], schema) => (["card", "upi", "wallet", "bank", "cheque"].includes(paymentMode) ? Validation("string", "Payment Account") : schema.nullable())),
+        cardHolderName: Yup.string().when("paymentMode", ([paymentMode], schema) => (paymentMode === "card" ? Validation("string", "Card Holder Name") : schema.nullable())),
+        cardTxnNo: Yup.string().when("paymentMode", ([paymentMode], schema) => (paymentMode === "card" ? Validation("string", "Card Transaction No") : schema.nullable())),
+        upiId: Yup.string().when("paymentMode", ([paymentMode], schema) => (paymentMode === "upi" ? Validation("string", "UPI ID") : schema.nullable())),
+        bankAccountNo: Yup.string().when("paymentMode", ([paymentMode], schema) => (paymentMode === "bank" ? Validation("string", "Bank Account No") : schema.nullable())),
+        chequeNo: Yup.string().when("paymentMode", ([paymentMode], schema) => (paymentMode === "cheque" ? Validation("string", "Cheque No") : schema.nullable())),
+      })
+    )
+    .min(1, "At least one payment is required"),
+});

@@ -33,7 +33,7 @@ const CFB = () => {
           </Typography>
 
           {/* URL */}
-          <Link to={url} target="_blank" rel="noopener noreferrer" className="font-medium break-all text-blue-600">
+          <Link to={url} target="_blank" rel="noopener noreferrer" className="font-medium break-all text-brand-600">
             {url}
           </Link>
 

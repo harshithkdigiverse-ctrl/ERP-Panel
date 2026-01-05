@@ -1,10 +1,18 @@
-import { PosBody, PosHeader } from "../../../Components/POS/New";
+import { MultiplePay, PosBody, PosHeader } from "../../../Components/POS/New";
+import { useAppSelector } from "../../../Store/hooks";
 
 const NewPos = () => {
+  const { isMultiplePay } = useAppSelector((state) => state.pos);
   return (
     <>
-      <PosHeader />
-      <PosBody />
+      {isMultiplePay ? (
+        <MultiplePay />
+      ) : (
+        <>
+          <PosHeader />
+          <PosBody />
+        </>
+      )}
     </>
   );
 };

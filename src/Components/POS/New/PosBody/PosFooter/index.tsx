@@ -9,13 +9,16 @@ import { Grid } from "@mui/material";
 import { useState } from "react";
 import { CommonButton, CommonTextField } from "../../../../../Attribute";
 import { useAppDispatch } from "../../../../../Store/hooks";
-import { setApplyCouponModal, setCardModal, setRedeemCreditModal } from "../../../../../Store/Slices/ModalSlice";
+import { setAdditionalChargeModal, setApplyCouponModal, setCardModal, setCashModal, setPayLaterModal, setRedeemCreditModal } from "../../../../../Store/Slices/ModalSlice";
 import RedeemCredit from "./RedeemCredit";
 import CardDetails from "./CardDetails";
 import ApplyCoupon from "./ApplyCoupon";
+import PayLater from "./PayLater";
+import Cash from "./Cash";
+import { setMultiplePay } from "../../../../../Store/Slices/PosSlice";
 const PosFooter = () => {
   const [value, setValue] = useState<string>("");
-  const summaryRowData = [{ label: "Quantity", value: "1.000" }, { label: "MRP", value: "50.00" }, { label: "Tax Amount", value: "7.63" }, { label: "Add. Charges+", value: "0.00" }, { label: "Discount", value: "0.00" }, { label: "Flat Discount" }, { label: "Round OFF" }, { label: "Amount", value: "50", highlight: true }];
+  const summaryRowData = [{ label: "Quantity", value: "1.000" }, { label: "MRP", value: "50.00" }, { label: "Tax Amount", value: "7.63" }, { label: "Add Charges+", value: "0.00" }, { label: "Discount", value: "0.00" }, { label: "Flat Discount" }, { label: "Round OFF" }, { label: "Amount", value: "50", highlight: true }];
   const dispatch = useAppDispatch();
 
   return (
@@ -34,8 +37,8 @@ const PosFooter = () => {
               {item.label === "Round OFF" && <CommonTextField label="Round OFF" value={value} onChange={(e) => setValue(e)} />}
               {item.value && (
                 <>
-                  <span className={`font-semibold ${item.highlight ? "text-blue-600 text-2xl" : "text-lg text-gray-900 dark:text-gray-100"}`}>{item.value}</span>
-                  <span className={`text-sm font-medium ${item.highlight ? "text-blue-600" : "text-gray-700 dark:text-gray-400"} mt-1`}>{item.label}</span>
+                  <span className={`font-semibold ${item.highlight ? "text-brand-600 text-2xl" : "text-lg text-gray-900 dark:text-gray-100"}`}>{item.value}</span>
+                  {item.label === "Add Charges+" ? <span onClick={() => dispatch(setAdditionalChargeModal())} className={`text-sm font-medium cursor-pointer text-brand-600 mt-1`}>{item.label}</span> : <span className={`text-sm font-medium ${item.highlight ? "text-brand-600" : "text-gray-700 dark:text-gray-400"} mt-1`}>{item.label}</span>}
                 </>
               )}
             </Grid>
@@ -44,14 +47,14 @@ const PosFooter = () => {
 
         {/* Action Buttons */}
         <div className="grid grid-cols-6 gap-2 p-2">
-          <CommonButton title="Multiple Pay (F12)" variant="contained" startIcon={<VerticalSplitIcon />} />
+          <CommonButton title="Multiple Pay (F12)" variant="contained" startIcon={<VerticalSplitIcon />} onClick={() => dispatch(setMultiplePay())} />
           <CommonButton title="Redeem Credit" variant="contained" startIcon={<RedeemIcon />} onClick={() => dispatch(setRedeemCreditModal())} />
           <CommonButton title="Hold (F6)" variant="contained" startIcon={<PauseIcon />} />
           <CommonButton title="UPI (F5)" variant="contained" startIcon={<FastForwardIcon />} />
           <CommonButton title="Card (F3)" variant="contained" startIcon={<CreditCardIcon />} onClick={() => dispatch(setCardModal())} />
-          <CommonButton title="Cash (F4)" variant="contained" startIcon={<CurrencyRupeeIcon />} />
-          <CommonButton title="Apply Coupon" variant="contained" startIcon={<RedeemIcon />} onClick={() => dispatch(setApplyCouponModal())}/>
-          <CommonButton title="Pay Later (F11)" variant="contained" startIcon={<CalendarMonthIcon />} />
+          <CommonButton title="Cash (F4)" variant="contained" startIcon={<CurrencyRupeeIcon />} onClick={() => dispatch(setCashModal())} />
+          <CommonButton title="Apply Coupon" variant="contained" startIcon={<RedeemIcon />} onClick={() => dispatch(setApplyCouponModal())} />
+          <CommonButton title="Pay Later (F11)" variant="contained" startIcon={<CalendarMonthIcon />} onClick={() => dispatch(setPayLaterModal())} />
           <CommonButton title="Hold & Print (F7)" variant="contained" startIcon={<PauseIcon />} />
           <CommonButton title="UPI & Print (F10)" variant="contained" startIcon={<FastForwardIcon />} />
           <CommonButton title="Card & Print (F9)" variant="contained" startIcon={<CreditCardIcon />} />
@@ -61,6 +64,8 @@ const PosFooter = () => {
       <RedeemCredit />
       <CardDetails />
       <ApplyCoupon />
+      <PayLater />
+      <Cash />
     </>
   );
 };

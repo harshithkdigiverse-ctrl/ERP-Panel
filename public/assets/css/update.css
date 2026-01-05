@@ -94,5 +94,5 @@ input[type="number"] {
 }
 
 .currency-btn {
-  @apply rounded-s-sm! rounded-e-none! w-9! h-10! bg-blue-600! text-white! text-xl! hover:bg-blue-600!;
+  @apply rounded-s-sm! rounded-e-none! w-9! h-10! bg-brand-600! text-white! text-xl! hover:bg-brand-600!;
 }

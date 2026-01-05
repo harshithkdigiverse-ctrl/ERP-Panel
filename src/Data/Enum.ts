@@ -142,3 +142,16 @@ export const REDEEM_CREDIT_TYPE = [
   { label: "Credit Note", value: "creditNote" },
   { label: "Advance Payment", value: "advancePayment" },
 ]
+
+export const PAYMENT_TERMS=[
+  {label:"7 Days",value:"7_days"},
+  {label:"15 Days",value:"15_days"},
+  {label:"30 Days",value:"30_days"},
+  {label:"60 Days",value:"60_days"},
+  {label:"90 Days",value:"90_days"},
+]
+
+export const SEND_REMINDER = [
+  { label: "Yes", value: "yes" },
+  { label: "No", value: "no" },
+]

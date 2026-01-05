@@ -4,6 +4,7 @@ import AuthSlice from "./Slices/AuthSlice";
 import ModalSlice from "./Slices/ModalSlice";
 import CompanySlice from "./Slices/CompanySlice";
 import DrawerSlice from "./Slices/DrawerSlice";
+import PosSlice from "./Slices/PosSlice";
 
 const Store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const Store = configureStore({
     modal: ModalSlice,
     company: CompanySlice,
     drawer: DrawerSlice,
+    pos: PosSlice,
   },
 });
 

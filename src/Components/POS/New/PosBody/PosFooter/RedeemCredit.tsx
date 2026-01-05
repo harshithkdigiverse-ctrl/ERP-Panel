@@ -23,7 +23,7 @@ const RedeemCredit = () => {
 
         {/* Invoice Balance */}
         <div className="flex justify-center">
-          <span className="bg-blue-600 text-white px-4 py-2 rounded text-sm font-semibold">Invoice Balance: 500.00</span>
+          <span className="bg-brand-500 text-white px-4 py-2 rounded text-sm font-semibold">Invoice Balance: 500.00</span>
         </div>
 
         {/* Scan / Input */}
