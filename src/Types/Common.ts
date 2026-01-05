@@ -5,6 +5,7 @@ import type { MuiTelInputProps } from "mui-tel-input";
 import type { FocusEvent, ReactNode } from "react";
 import * as Yup from "yup";
 import type { CustomerFormValues } from "./Customer";
+import type { BrandFormValues } from "./Brand";
 
 type GridType = number | object | "auto" | "grow";
 
@@ -360,6 +361,7 @@ export interface ModalStateSlice {
   selectedFiles: string[];
   isModalVideoPlay: { open: boolean; link: string };
   isCustomerModal: { open: boolean; data: CustomerFormValues | null };
+  isBrandModal: {open: boolean; data: BrandFormValues | null};
   isPaymentListModal: boolean;
   isAddPaymentModal: boolean;
   isRedeemLoyaltyModal: boolean;

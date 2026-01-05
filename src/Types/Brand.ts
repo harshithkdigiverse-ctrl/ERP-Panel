@@ -5,6 +5,7 @@ export interface BrandFormValues {
   name?: string;
   description?: string;
   parentBrandId?: string;
+  image?: File | string | null;
   isActive?: boolean;
   _submitAction?: "save" | "saveAndNew";
 }

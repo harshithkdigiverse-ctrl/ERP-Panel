@@ -1,17 +1,19 @@
 import type { GridColDef } from "@mui/x-data-grid";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import type { BrandBase } from "../../../Types/Brand";
 import { Mutations, Queries } from "../../../Api";
 import { CommonActionColumn, CommonCard, CommonDataGrid, CommonDeleteModal } from "../../../Components/Common";
 import { PAGE_TITLE } from "../../../Constants";
 import { useDataGrid } from "../../../Utils/Hooks";
 import BrandForm from "./BrandForm";
+import { useDispatch, useSelector } from "react-redux";
+import { setBrandModal } from "../../../Store/Slices/ModalSlice";
 
 
 const Brand = () => {
   const { paginationModel, setPaginationModel, sortModel, setSortModel, filterModel, setFilterModel, rowToDelete, setRowToDelete, isActive, setActive, params } = useDataGrid();
-  const [openModal, setOpenModal] = useState(false);
-  const [isEdit, setEdit] = useState<BrandBase>({} as BrandBase);
+  const dispatch = useDispatch();
+  const { isBrandModal } = useSelector((state: any) => state.modal);
 
   const { data: BrandsData, isLoading: brandsDataLoading, isFetching: brandsDataFetching } = Queries.useGetBrand(params);
   const { mutate: deleteBrandsMutate } = Mutations.useDeleteBrand();
@@ -26,20 +28,21 @@ const Brand = () => {
   };
 
   const handleAdd = () => {
-    setEdit({} as BrandBase);
-    setOpenModal(!openModal);
+    dispatch(setBrandModal({ open: true, data: null }));
   };
 
   const handleEdit = (row: BrandBase) => {
-    setEdit(row);
-    setOpenModal(!openModal);
+    dispatch(setBrandModal({ open: true, data: row }));
   };
 
   const columns: GridColDef<BrandBase>[] = [
+    {
+      field: "image", headerName: "Image", width: 80, renderCell: ({ value }) => value ? <img src={value} style={{ width: 40 }} /> : "-",
+    },
     { field: "name", headerName: "Name", flex: 1 },
     { field: "code", headerName: "Code", flex: 1 },
-    { field: "Description", headerName: "Description", flex: 1 },
-    { field: "parentBrandId", headerName: "parent Brand", flex: 1},
+    { field: "description", headerName: "Description", flex: 1 },
+    { field: "parentBrandId", headerName: "parent Brand", flex: 1 },
     CommonActionColumn({
       active: (row) => editBrand({ brandId: row?._id, isActive: !row.isActive }),
       onEdit: (row) => handleEdit(row),
@@ -51,7 +54,7 @@ const Brand = () => {
     columns,
     rows: allBrands,
     rowCount: totalRows,
-    loading: brandsDataLoading|| brandsDataFetching || isEditLoading,
+    loading: brandsDataLoading || brandsDataFetching || isEditLoading,
     isActive,
     setActive,
     handleAdd,
@@ -69,7 +72,7 @@ const Brand = () => {
         <CommonDataGrid {...CommonDataGridOption} />
       </CommonCard>
       <CommonDeleteModal open={Boolean(rowToDelete)} itemName={rowToDelete?.title} onClose={() => setRowToDelete(null)} onConfirm={() => handleDeleteBtn()} />
-      <BrandForm openModal={openModal} setOpenModal={setOpenModal} isEdit={isEdit} />
+      <BrandForm />
     </>
   );
 };
